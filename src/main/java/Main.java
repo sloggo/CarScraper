@@ -13,13 +13,27 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     List<Car> cars = new ArrayList<>();
     public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a search keyword (leave empty for all):");
+        String searchQuery = scanner.nextLine();
+        String[] queries = searchQuery.split(" ");
+        searchQuery = "";
+
+        for(int i=0; i<queries.length; i++){
+            if(i != 0){
+                searchQuery+="%20";
+            }
+            searchQuery += queries[i];
+        }
+
         String html = "";
         for(int i=0; i<10; i++){
-            html += httpReq("https://www.donedeal.ie/cars?start="+(i*30));
+            html += httpReq("https://www.donedeal.ie/cars?words="+searchQuery+"&start="+(i*30));
         }
 
         DonedealScraper scraper = new DonedealScraper(html);

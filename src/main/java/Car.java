@@ -25,10 +25,11 @@ public class Car {
 
     public String rateCar(){
         int score = 0;
-        score -= yearOfManufacture;
-        score += (mileage/100);
+        score -= yearOfManufacture*10;
+        score += (mileage/10);
+        score += price;
         if(warranty){
-            score -= 1000;
+            score -= 10000;
         }
         return String.valueOf(score);
     }

@@ -91,6 +91,10 @@ public class DonedealScraper {
                 }
 
                 String link = carListing.select("a[href]").attr("href");
+
+                if(mileageFormatted <= 10000){
+                    mileageFormatted*=1000;
+                }
                 Car newCar = new Car(carName, carPrice, Integer.parseInt(info.get(0)), info.get(3), warranty, mileageFormatted, link);
                 cars.add(newCar);
             } catch(NumberFormatException e) {
